@@ -112,6 +112,8 @@ jobs:
           apk add openssh-client
           PUBLIC_DNS=$(cat public_dns.txt)
           scp -o StrictHostKeyChecking=no -i naveencatlog.pem target/movie-info-service-0.0.1-SNAPSHOT.jar ubuntu@$PUBLIC_DNS:/home/ubuntu/
+     
+     
       - name: Run JAR file on EC2 instance
         uses: docker://alpine:latest
         run: |
