@@ -27,7 +27,7 @@ jobs:
         uses: docker://maven:3-eclipse-temurin-17
         run: |
           mvn clean install 
-          ls -l /cloudbees/workspace
+          ls -l /cloudbees/workspace/target
   StaticAnalysis:
     needs:
       - Build
