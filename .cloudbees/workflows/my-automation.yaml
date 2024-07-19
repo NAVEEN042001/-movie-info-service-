@@ -27,6 +27,7 @@ jobs:
         uses: docker://maven:3-eclipse-temurin-17
         run: |
           mvn clean install 
+          ls -l /cloudbees/workspace
   StaticAnalysis:
     needs:
       - Build
@@ -100,3 +101,12 @@ jobs:
         run: |
           echo "Waiting for 60 seconds to ensure the instance is ready..."
           sleep 60
+
+
+      - name: Transfer JAR file to EC2 instance
+        uses: docker://alpine:latest
+        run: |
+          apk update
+          apk add openssh-client
+          PUBLIC_DNS=$(cat public_dns.txt)
+          scp -o StrictHostKeyChecking=no -i naveencatlog.pem target/ ubuntu@$PUBLIC_DNS:/home/ubuntu/
