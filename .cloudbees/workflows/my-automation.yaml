@@ -101,7 +101,9 @@ jobs:
         run: |
           echo "Waiting for 60 seconds to ensure the instance is ready..."
           sleep 60
-
+          
+      - name: checkout
+        uses: cloudbees-io/checkout@v1
 
       - name: Transfer JAR file to EC2 instance
         uses: docker://alpine:latest
